@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jurre Bakker — GIS & Spatial Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --text: #1a1a18;
+      --muted: #6b6b66;
+      --accent: #1D9E75;
+      --accent-light: #E1F5EE;
+      --border: #e2e0d8;
+      --tag-bg: #eef9f5;
+      --tag-text: #0F6E56;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(248,247,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* LAYOUT */
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section { padding: 80px 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* HERO */
+    #hero {
+      padding: 100px 0 80px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(42px, 7vw, 64px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-intro {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover { background: #0F6E56; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    h2.section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .skill-group-title {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-weight: 400;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .project-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 20px;
+    }
+
+    .project-title {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* CV / TIMELINE */
+    .cv-section { margin-top: 2rem; }
+
+    .cv-block { margin-bottom: 2.5rem; }
+
+    .cv-block-title {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1rem;
+      padding: 0.75rem 0;
+    }
+
+    .cv-item + .cv-item {
+      border-top: 1px solid var(--border);
+    }
+
+    .cv-date {
+      font-size: 13px;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .cv-role { font-weight: 500; font-size: 15px; }
+    .cv-org { font-size: 14px; color: var(--accent); margin-bottom: 4px; }
+    .cv-detail { font-size: 14px; color: var(--muted); }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-intro { color: var(--muted); margin-bottom: 1.5rem; }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .contact-form textarea { resize: vertical; min-height: 100px; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .about-grid, .projects-grid, .contact-grid { grid-template-columns: 1fr; }
+      .cv-item { grid-template-columns: 1fr; gap: 2px; }
+      nav { padding: 0 1rem; }
+      .container { padding: 0 1.25rem; }
+      section { padding: 60px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">JB</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="container">
+    <section id="hero">
+      <span class="hero-label">Open to opportunities</span>
+      <h1 class="hero-name">Jurre<br /><em>Bakker</em></h1>
+      <p class="hero-intro">MSc student in Geo-Information Science</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View my projects</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-title">About me</h2>
+          <p>placeholder text for the about section</p>
+          <p>placeholder text for the about section</p>
+          <p>placeholder text for the about section</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">MSc</div>
+            <div class="stat-label">Geo-Information Science, Wageningen University and Research</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2026</div>
+            <div class="stat-label">Expected graduation year</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">NL</div>
+            <div class="stat-label">Based in the Netherlands</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">GIS</div>
+          <div class="skill-tags">
+            <span class="tag">QGIS</span>
+            <span class="tag">ArcGIS</span>
+            <span class="tag">PostGIS</span>
+            <span class="tag">Remote sensing</span>
+            <span class="tag">GeoPandas</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Programming</div>
+          <div class="skill-tags">
+            <span class="tag">Python</span>
+            <span class="tag">R</span>
+            <span class="tag">SQL</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">packages</div>
+          <div class="skill-tags">
+            <span class="tag">Pandas</span>
+            <span class="tag">Numpy</span>
+            <span class="tag">Rasterio</span>
+            <span class="tag">Machine learning</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Visualisation</div>
+          <div class="skill-tags">
+            <span class="tag">Leaflet</span>
+            <span class="tag">Mapbox</span>
+            <span class="tag">Matplotlib</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p style="color: var(--muted); max-width: 520px;">placeholder text for the projects section</p>
+
+      <div class="projects-grid">
+        <a href="#" class="project-card">
+          <div class="project-icon">🛰️</div>
+          <div class="project-title">placeholder</div>
+          <div class="project-desc">placeholder description for the land use change detection project</div>
+          <div class="project-tags">
+            <span class="tag">Remote sensing</span>
+            <span class="tag">Python</span>
+            <span class="tag">Rasterio</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-icon">🗺️</div>
+          <div class="project-title">Accessibility mapping</div>
+          <div class="project-desc">Analysed pedestrian and cycling accessibility to public services across Dutch municipalities using OSM network data.</div>
+          <div class="project-tags">
+            <span class="tag">QGIS</span>
+            <span class="tag">Network analysis</span>
+            <span class="tag">OSM</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-icon">🌊</div>
+          <div class="project-title">Flood risk modelling</div>
+          <div class="project-desc">Built a spatial model to estimate residential flood exposure under different climate scenarios using DEM and land cover data.</div>
+          <div class="project-tags">
+            <span class="tag">ArcGIS</span>
+            <span class="tag">R</span>
+            <span class="tag">DEM analysis</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-icon">📊</div>
+          <div class="project-title">Interactive spatial dashboard</div>
+          <div class="project-desc">Developed a browser-based dashboard to explore spatial patterns in agricultural productivity data across the Netherlands.</div>
+          <div class="project-tags">
+            <span class="tag">Leaflet</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">GeoPandas</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section id="cv">
+      <h2 class="section-title">CV</h2>
+
+      <div class="cv-section">
+        <div class="cv-block">
+          <div class="cv-block-title">Education</div>
+          <div class="cv-item">
+            <div class="cv-date">2023 – 2025</div>
+            <div>
+              <div class="cv-role">MSc Geo-Information Science</div>
+              <div class="cv-org">Wageningen University & Research</div>
+              <div class="cv-detail">placeholder detail for the master's program</div>
+            </div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-date">2020 – 2023</div>
+            <div>
+              <div class="cv-role">BSc [Your bachelor's programme]</div>
+              <div class="cv-org">[Your university]</div>
+              <div class="cv-detail">placeholder detail for the bachelor's program</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-block">
+          <div class="cv-block-title">Experience</div>
+          <div class="cv-item">
+            <div class="cv-date">[Year]</div>
+            <div>
+              <div class="cv-role">[Job title or internship]</div>
+              <div class="cv-org">[Organisation]</div>
+              <div class="cv-detail">placeholder detail for the experience</div>
+            </div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-date">[Year]</div>
+            <div>
+              <div class="cv-role">[Another role]</div>
+              <div class="cv-org">[Organisation]</div>
+              <div class="cv-detail">placeholder detail for the another role</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-block">
+          <div class="cv-block-title">Languages</div>
+          <div class="cv-item">
+            <div class="cv-date">Dutch</div>
+            <div><div class="cv-role">Native</div></div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-date">English</div>
+            <div><div class="cv-role">Fluent</div></div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="btn btn-outline" style="margin-top: 0.5rem;">Download full CV (PDF)</a>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-grid">
+        <div>
+          <h2 class="section-title">Get in touch</h2>
+          <p class="contact-intro">placeholder</p>
+          <div class="contact-links">
+            <a href="mailto:jurrebakker04@gmail.com" class="contact-link">
+              <div class="contact-link-icon">✉️</div>
+              jurrebakker04@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/jurre-bakker" class="contact-link" target="_blank">
+              <div class="contact-link-icon">in</div>
+              linkedin.com/in/jurre-bakker
+            </a>
+            <a href="https://github.com/JBBakker" class="contact-link" target="_blank">
+              <div class="contact-link-icon">⌥</div>
+              github.com/JBBakker
+            </a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <input type="text" placeholder="Your name" />
+          <input type="email" placeholder="Your email" />
+          <textarea placeholder="Your message"></textarea>
+          <button class="btn btn-primary" style="align-self: flex-start;">Send message</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 Jurre Bakker · Built with HTML & CSS · Hosted on GitHub Pages</p>
+  </footer>
+
+</body>
+</html>

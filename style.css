@@ -249,7 +249,7 @@
     /* SKILLS */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 1rem;
       margin-top: 2rem;
     }
@@ -456,7 +456,7 @@
 
     /* RESPONSIVE */
     @media (max-width: 640px) {
-      .about-grid, .projects-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-grid, .projects-grid, .contact-grid, .skills-grid { grid-template-columns: 1fr; }
       .cv-item { grid-template-columns: 1fr; gap: 2px; }
       nav { padding: 0 1rem; }
       .container { padding: 0 1.25rem; }

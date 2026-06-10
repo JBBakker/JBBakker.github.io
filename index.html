@@ -56,12 +56,8 @@
       <div class="about-grid">
         <div class="about-text">
           <h2 class="section-title">About me</h2>
-          <p>I am a very social person. I genuinely enjoy talking with people, whether it's a deep conversation or 
-              just light-hearted small talk. This openness tends to help me make friends quickly, especially in new 
-              situations. I connect with people easily and like to think I'm pretty approachable. 
-              On top of that, I struggle to sit still for long. I always need something to pour my energy into, a hobby, 
-              a project, or just something to work toward. If I find something that truly grabs my attention, I go all 
-              in. I get completely absorbed in a project I care about and giving it everything I've got. </p>
+          <p>Hi there! I'm Jurre, I did my BSc and MSc at the Wageningen University. During my Bachelors I focused on Hydrology and Geology in a more physics and modeling based approach. I really loved working with streams, flow velocities and soil water dynamics. I, however, discovered that I was very interested in the more hard skills like, coding and remote sensing. Therefore, I opted for the MSc program Geo Information Science. During this time I learned a lot on the whole process, from data gathering to final product. 
+              I consciously decided to gather skills besides my study to have a more diverse skillset. One of my biggest and what I enjoyed most were my board year and activity organization experiences. </p>
         </div>
         <div class="about-stats">
           <div class="stat-card">
@@ -124,52 +120,111 @@
     <!-- PROJECTS -->
     <section id="projects">
       <h2 class="section-title">Projects</h2>
-      <p style="color: var(--muted); max-width: 520px;">During my studies I worked on many different projects. Some of my personal favorites are listed below.</p>
+      <p class="projects-intro">During my studies I worked on many different projects. The selection below is laid out as separate widgets so you can scroll through them one by one. Each panel combines a short explanation with a visual summary, and some of them include a report download.</p>
 
-      <div class="projects-grid">
-        <a href="#" class="project-card">
-          <div class="project-icon">🛰️</div>
-          <div class="project-title">Virtual forest gaming environment</div>
-          <div class="project-desc">For a preparation ACT project I worked together with my team to develop a virtual forest environment that attempts to teach children about the advantages of forests.</div>
-          <div class="project-tags">
-            <span class="tag">LiDAR</span>
-            <span class="tag">Unity</span>
-            <span class="tag">Remote Sensing</span>
+      <div class="projects-stack">
+        <article class="project-widget">
+          <div class="project-copy">
+            <span class="hero-label">Featured project</span>
+            <h3 class="project-title">Virtual forest gaming environment</h3>
+            <p class="project-desc">For a preparation ACT project I worked together with my team to develop a virtual forest environment that attempts to teach children about the advantages of forests. The concept translated ecological ideas into an interactive setting that could support outreach and learning.</p>
+            <div class="project-tags">
+              <span class="tag">LiDAR</span>
+              <span class="tag">Unity</span>
+              <span class="tag">Remote sensing</span>
+            </div>
+            <div class="project-actions">
+              <a href="reports/virtual-forest-report.txt" class="btn btn-outline" download>Download report</a>
+            </div>
           </div>
-        </a>
+          <div class="project-visual project-visual--forest" aria-hidden="true">
+            <div class="visual-canvas">
+              <div class="forest-sky"></div>
+              <div class="forest-hills"></div>
+              <div class="forest-trunks"></div>
+              <div class="forest-overlay-card">
+                <span>Learning layers</span>
+                <strong>Interactive forest scene</strong>
+              </div>
+            </div>
+          </div>
+        </article>
 
-        <a href="#" class="project-card">
-          <div class="project-icon">🗺️</div>
-          <div class="project-title">Accessibility mapping</div>
-          <div class="project-desc">Analysed pedestrian and cycling accessibility to public services across Dutch municipalities using OSM network data.</div>
-          <div class="project-tags">
-            <span class="tag">QGIS</span>
-            <span class="tag">Network analysis</span>
-            <span class="tag">OSM</span>
+        <article class="project-widget project-widget--reverse">
+          <div class="project-copy">
+            <span class="hero-label">Spatial analysis</span>
+            <h3 class="project-title">Accessibility mapping</h3>
+            <p class="project-desc">Analysed pedestrian and cycling accessibility to public services across Dutch municipalities using OSM network data. The project focused on how movement patterns, service locations and local network structure affect reachability in daily life.</p>
+            <div class="project-tags">
+              <span class="tag">QGIS</span>
+              <span class="tag">Network analysis</span>
+              <span class="tag">OSM</span>
+            </div>
           </div>
-        </a>
+          <div class="project-visual project-visual--accessibility" aria-hidden="true">
+            <div class="visual-canvas">
+              <div class="map-grid"></div>
+              <div class="map-route map-route--primary"></div>
+              <div class="map-route map-route--secondary"></div>
+              <div class="map-node map-node--a"></div>
+              <div class="map-node map-node--b"></div>
+              <div class="map-node map-node--c"></div>
+              <div class="visual-chip">Accessibility network</div>
+            </div>
+          </div>
+        </article>
 
-        <a href="#" class="project-card">
-          <div class="project-icon">🌊</div>
-          <div class="project-title">Flood risk modelling</div>
-          <div class="project-desc">Built a spatial model to estimate residential flood exposure under different climate scenarios using DEM and land cover data.</div>
-          <div class="project-tags">
-            <span class="tag">ArcGIS</span>
-            <span class="tag">R</span>
-            <span class="tag">DEM analysis</span>
+        <article class="project-widget">
+          <div class="project-copy">
+            <span class="hero-label">Report included</span>
+            <h3 class="project-title">Flood risk modelling</h3>
+            <p class="project-desc">Built a spatial model to estimate residential flood exposure under different climate scenarios using DEM and land cover data. The workflow combined terrain analysis with scenario comparison to identify areas with higher exposure.</p>
+            <div class="project-tags">
+              <span class="tag">ArcGIS</span>
+              <span class="tag">R</span>
+              <span class="tag">DEM analysis</span>
+            </div>
+            <div class="project-actions">
+              <a href="reports/flood-risk-report.txt" class="btn btn-outline" download>Download report</a>
+            </div>
           </div>
-        </a>
+          <div class="project-visual project-visual--flood" aria-hidden="true">
+            <div class="visual-canvas">
+              <div class="flood-bars">
+                <span style="height: 38%"></span>
+                <span style="height: 62%"></span>
+                <span style="height: 44%"></span>
+                <span style="height: 76%"></span>
+                <span style="height: 50%"></span>
+              </div>
+              <div class="flood-ribbon"></div>
+              <div class="flood-label">Scenario comparison</div>
+            </div>
+          </div>
+        </article>
 
-        <a href="#" class="project-card">
-          <div class="project-icon">📊</div>
-          <div class="project-title">Interactive spatial dashboard</div>
-          <div class="project-desc">Developed a browser-based dashboard to explore spatial patterns in agricultural productivity data across the Netherlands.</div>
-          <div class="project-tags">
-            <span class="tag">Leaflet</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">GeoPandas</span>
+        <article class="project-widget project-widget--reverse">
+          <div class="project-copy">
+            <span class="hero-label">Dashboard</span>
+            <h3 class="project-title">Interactive spatial dashboard</h3>
+            <p class="project-desc">Developed a browser-based dashboard to explore spatial patterns in agricultural productivity data across the Netherlands. The interface combined maps, filters and summary charts to make the dataset easier to explore.</p>
+            <div class="project-tags">
+              <span class="tag">Leaflet</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">GeoPandas</span>
+            </div>
           </div>
-        </a>
+          <div class="project-visual project-visual--dashboard" aria-hidden="true">
+            <div class="visual-canvas">
+              <div class="dashboard-header"></div>
+              <div class="dashboard-sidebar"></div>
+              <div class="dashboard-map"></div>
+              <div class="dashboard-chart dashboard-chart--one"></div>
+              <div class="dashboard-chart dashboard-chart--two"></div>
+              <div class="dashboard-chart dashboard-chart--three"></div>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 

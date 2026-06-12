@@ -1,0 +1,12 @@
+Lightrail project
+
+I worked on designing a imaginary tram track that could run trough Wageningen. During this project I had to make many decisions on position, costs and practicality. All of these choices i based on real world facts that I spatially interpreted using Esri's ArcGIS content. 
+
+
+Fieldworkapp
+
+I worked on a short project on designing the initial functionality of an application that can be used for scientific fieldwork. The Fieldwork app would be deployed on fieldwork and assist the user to store and easily extract this data. The app would do certain laborious tasks automatically like saving a location. The project was mainly a good study in java scripting. 
+
+Automatic wetland classification
+
+The Loosdrecht lakes in Utrecht, the Netherlands, experience large yearly changes in water height. Because of this some parts of the land are flooded regularly. To map these changes I used Sentinel 2 imagery and the Water in Wetlands index to check whether a piece of land during a certain moment in the year is flooded or not. 
